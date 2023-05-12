@@ -176,6 +176,46 @@ module.hot.accept(reloadCSS);
 "use strict";
 
 require("./styles.css");
+var onClickAdd = function onClickAdd() {
+  // テキストボックスの値を取得し、初期化する
+  var inputText = document.getElementById("add-text").value;
+  document.getElementById("add-text").value = "";
+
+  // div生成
+  var div = document.createElement("div");
+  div.className = "list-row";
+
+  // liタグ生成
+  var li = document.createElement("li");
+  li.innerText = inputText;
+
+  // button(完了)タグ作成
+  var completeButton = document.createElement("button");
+  completeButton.innerText = "完了";
+  completeButton.addEventListener("click", function () {
+    alert("完了");
+  });
+
+  // button(削除)タグ作成
+  var deleteButton = document.createElement("button");
+  deleteButton.innerText = "削除";
+  deleteButton.addEventListener("click", function () {
+    // 押された削除ボタンの親タグ(div)を未完了リストから削除
+    var deleteTarget = deleteButton.parentNode;
+    document.getElementById("incomplete-list").removeChild(deleteTarget);
+  });
+
+  // divタグの子要素に各要素を設定
+  div.appendChild(li);
+  div.appendChild(completeButton);
+  div.appendChild(deleteButton);
+
+  //未完了リストに追加
+  document.getElementById("incomplete-list").appendChild(div);
+};
+document.getElementById("add-button").addEventListener("click", function () {
+  return onClickAdd();
+});
 },{"./styles.css":"src/styles.css"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
